@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/omart/PycharmProjects/lang_training/ll.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1269"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainlinks"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="links" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="60"/><column index="2" value="98"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">--SELECT strftime('%Y-%m-%d %H-%M-%S','now');
+--SELECT datetime('now');
+--UPDATE words SET lastshow=datetime('now'), show_nr = 2, error_nr = 2, score = -3 WHERE id=38;
+--SELECT * FROM words ORDER by word ASC LIMIT 50;
+--SELECT * FROM words WHERE creation &lt; datetime('now','-30 day');
+--SELECT *,MAX(creation) FROM words GROUP BY creation HAVING lastshow IS NOT NULL; 
+--SELECT * FROM translations ORDER by word ASC LIMIT 10;
+--SELECT * FROM translations WHERE word LIKE 'ма%' ORDER by word ASC LIMIT 10;
+--INSERT INTO links(id_word, id_translation)  VALUES('{}', '{}')
+--ALTER TABLE words  ADD  score INT DEFAULT 0;
+--ALTER TABLE words   DROP score;
+
+--SELECT * FROM words WHERE lastshow IS  NULL ORDER BY id LIMIT 1; 
+SELECT * FROM translations WHERE  id IN (SELECT id_translation FROM links WHERE id_word = 4);
+--SELECT COUNT(*) FROM words WHERE lastshow IS  NULL; </sql><current_tab id="0"/></tab_sql></sqlb_project>
