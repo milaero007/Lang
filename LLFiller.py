@@ -32,6 +32,7 @@ class FillerGui:
         if self.controller.db_connection.isPasswordOK(answer1):
             self.connection_menu.entryconfig("DB drop", state="normal")
             self.connection_menu.entryconfig("DB create", state="normal")
+            self.connection_menu.entryconfig("DB stats reset", state="normal")
         else:
             messagebox.showerror('error', "Invalid password");
 
@@ -52,6 +53,16 @@ class FillerGui:
                 self.controller.db_connection.create_tables()
             except Exception as e:
                 messagebox.showerror('error on creation', e.with_traceback());
+        elif res == 'no':
+            pass
+
+    def db_reset_stats(self) -> None:
+        res = messagebox.askquestion('Reset training stats', 'Do you want to reset training statistics')
+        if res == 'yes':
+            try:
+                self.controller.db_connection.reset_all_stats()
+            except Exception as e:
+                messagebox.showerror('error on statistics reset', e.with_traceback());
         elif res == 'no':
             pass
 
@@ -96,6 +107,7 @@ class FillerGui:
         self.connection_menu.add_command(label="DB access", command=self.enable_db_access)
         self.connection_menu.add_command(label="DB drop", state="disabled", command=self.db_drop_tables)
         self.connection_menu.add_command(label="DB create", state="disabled", command=self.db_create_tables)
+        self.connection_menu.add_command(label="DB stats reset", state="disabled", command=self.db_reset_stats)
         self.connection_menu.add_command(label="Exit", command=self.root.quit)
 
         # Word Type
