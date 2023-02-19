@@ -23,6 +23,7 @@ class PlayGui:
     def __init__(self, playController):
         self.controller = playController
         self.root.title('Learning new words')
+        self.isRunning = False
 
         # ------------------------------------
         #  ---< C O N F I G U R A T I O N >---
@@ -67,6 +68,16 @@ class PlayGui:
     def enable_controls(self):
         self.bt_start['state'] = tkinter.NORMAL
         self.bt_ok['state'] = tkinter.NORMAL
+
+    def toggle_start(self):
+        if self.isRunning:
+            self.bt_start['text'] = tkinter.NORMAL = "Start"
+            self.isRunning = False
+            self.clear_words(self.LIST_LEFT)
+        else:
+            self.bt_start['text'] = tkinter.NORMAL = "Stop"
+            self.isRunning = True
+
 
     def add_words(self, where: int, words : []) -> None:
         if where == self.LIST_LEFT:
@@ -140,6 +151,7 @@ class PlayController:
     def start_command(self):
         words = ["apple", "day", "nothing"]
         self.gui.add_words(PlayGui.LIST_LEFT, words)
+        self.gui.toggle_start()
         pass
 
     def ok_command(self):
