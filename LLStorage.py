@@ -48,8 +48,9 @@ table_select_links = "SELECT * FROM translations WHERE  id IN (SELECT id_transla
 table_remove_all_links = "DELETE FROM links WHERE id_word = {}"
 
 ###  --- PLAYING ---
-initial_play_rqst = "SELECT * FROM words WHERE lastshow IS NULL ORDER BY id LIMIT 1;"
-
+initial_play_rqst = "SELECT * FROM words WHERE lastshow IS NULL ORDER BY id LIMIT '{}';"
+reset_all_stats_rqst = "UPDATE words SET lastshow=NULL, show_nr = 0, error_nr = 0, score = 0 WHERE True;"
+reset_all_stats_rqst = "UPDATE words SET lastshow=NULL, show_nr = 0, error_nr = 0, score = 0 WHERE True;"
 
 class SQLite:
     db_connection = []
@@ -205,5 +206,9 @@ class SQLite:
     def remove_link(self, id_word: int, id_translation: int) -> None:
         rqst = table_remove_links.format(id_word, id_translation)
         self.db_connection.execute(rqst)
+        self.db_connection.commit()
+
+    def reset_all_stats(self) -> None:
+        self.db_connection.execute(reset_all_stats_rqst)
         self.db_connection.commit()
 
